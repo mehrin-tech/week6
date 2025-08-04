@@ -1,29 +1,48 @@
-const express=require('express')
+// const express=require('express')
+// const {
+//     getAllTeachers,
+//     getAddTeachers,
+//     addFormTeachers,
+//     getSingleTeacher
+// }=require('../controllers/teacherControllers.js')
+
+// const router=express.Router()
+
+// //show all teachers
+
+// router.get('/',getAllTeachers)
+
+// //show add teachers
+// router.get('/add',getAddTeachers)
+
+// //handle form submission
+
+// router.post('/add',addFormTeachers)
+
+// //view single
+// router.get('/:id',getSingleTeacher)
+
+// module.exports=router
+const express = require('express');
+const router = express.Router();
+
 const {
-    getAllTeachers,
-    getAddTeachers,
-    addFormTeachers,
-    getSingleTeacher
-}=require('../controllers/teacherControllers')
+  getAllTeachers,
+  getAddTeachers,
+  addFormTeachers,
+  getSingleTeacher
+} = require('../controllers/teacherControllers');
 
-const router=express.Router()
+// GET /teachers - List all teachers
+router.get('/', getAllTeachers);
 
-let teachers=[
-    {id:1,name:"Mrs.Lakshmi",sub:'Math'},
-    {id:2,name:'Mr.Sunil',sub:'science'}
-]
-//show all teachers
+// GET /teachers/add - Show add teacher form
+router.get('/add', getAddTeachers);
 
-router.get('/',getAllTeachers)
+// POST /teachers/add - Handle form submission
+router.post('/add', addFormTeachers);
 
-//show add teachers
-router.get('/add',getAddTeachers)
+// GET /teachers/:id - View single teacher details
+router.get('/:id', getSingleTeacher);
 
-//handle form submission
-
-router.post('/add',addFormTeachers)
-
-//view single
-router.get('/:id',getSingleTeacher)
-
-module.exports=router
+module.exports = router;

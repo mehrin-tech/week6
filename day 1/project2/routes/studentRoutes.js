@@ -1,24 +1,46 @@
-const express=require('express')
-const router=express.Router()
+// const express=require('express')
+// const router=express.Router()
+// const {
+//     getAllStudents,
+//      getAddStudents,
+//       addFormStudents,
+//        getSingleStudent
+//     }=require('../controllers/studentControllers.js')
+
+
+
+
+// //show all students
+// router.get('/',getAllStudents)
+// //show add form
+// router.get('/add',getAddStudents)
+// //handle form submission
+// router.post('/add',addFormStudents)
+// //view single stdunt
+
+// router.get('/:id',getSingleStudent)
+
+// module.exports=router
+const express = require('express');
+const router = express.Router();
+
 const {
-    getAllStudents,
-     getAddStudents,
-      addFormStudents,
-       getSingleStudent}=require('../controllers/studentControllers')
+  getAllStudents,
+  getAddStudents,
+  addFormStudents,
+  getSingleStudent
+} = require('../controllers/studentControllers');
 
-let students=[
-    {id:1,name:"Rahul",grade:"10"},
-    {id:2,name:"Rihan",grade:"9"}
+// GET /students - List all students
+router.get('/', getAllStudents);
 
-]
-//show all students
-router.get('/',getAllStudents)
-//show add form
-router.get('/add',getAddStudents)
-//handle form submission
-router.post('/add',addFormStudents)
-//view single stdunt
+// GET /students/add - Show add student form
+router.get('/add', getAddStudents);
 
-router.get('/:id',getSingleStudent)
+// POST /students/add - Handle form submission
+router.post('/add', addFormStudents);
 
-module.exports=router
+// GET /students/:id - View a single student by ID
+router.get('/:id', getSingleStudent);
+
+module.exports = router;
