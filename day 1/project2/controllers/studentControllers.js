@@ -1,63 +1,6 @@
-// let students=[
-//     {id:1,name:"Rahul",grade:"10"},
-//     {id:2,name:"Rihan",grade:"9"}
-
-// ]
-// //data fetch
-// const fetchAllStudents=()=>{
-//     return new Promise((res)=>{
-//         setTimeout(()=>{
-//             res(students)
-//         },1000)
-//     })
-// }
-// const getAllstudents=async(req,res)=>{
-//     try{
-//    const studentsList= await fetchAllStudents()
-//        res.render('students',{title:'all students',students:studentsList})
-
-//     }catch(err){
-//      res.status(500).send("failed to fetch students")
-//     }
-// }
-// // const getAllstudents=(req,res)=>{
-// //     res.render('students',{title:'all students',students})
-// // }
-
-// // const getAllstudents=async(req,res)=>{
-// //     try{
-// //       const studentsList=await fetchAllStudents()
-// //       res.render('students',{title:'all students',students:studentsList})
-// //     }catch(err){
-// //         res.status(500).send("failed to fetch students")
-// //     }
-    
-// // }
-//  const getAddStudents=(req,res)=>{
-//     res.render('addStudent',{title:'add student'})
-// }
-//  const addFormStudents=(req,res)=>{
-//     const {name,grade}=req.body
-//     const newStd={
-//         id:students.length+1,
-//         name,
-//         grade,
-//     }
-// students.push(newStd)
-// res.redirect('/students')
-// }
-// const getSingleStudent=(req,res)=>{
-//     const student=students.find(s=>s.id===parseInt(req.params.id))
-//     if(!student) return res.status(404).send("student not found")
-//         res.render('studentDetails',{title:'student details',student})
-// }
-// module.exports={
-//     getAllstudents,
-//     getAddStudents,
-//     addFormStudents,
-//     getSingleStudent
-// }
-
+const path=require('path')
+const fs=require('fs').promises
+const filepath=path.join(__dirname,'../data/students.json')
 // // Sample student data
 let students = [
   { id: 1, name: "Rahul", grade: "10" },
@@ -77,7 +20,9 @@ const fetchAllStudents = () => {
 // Controller: List all students
 const getAllStudents = async (req, res) => {
   try {
-    const studentsList = await fetchAllStudents();
+    const data=await fs.readFile(filepath,'utf-8')
+   // const studentsList = await fetchAllStudents();
+   const studentsList=JSON.parse(data)
     res.render('students', { title: 'All Students', students: studentsList });
   } catch (err) {
     console.error(err);
@@ -94,14 +39,17 @@ const getAddStudents = (req, res) => {
 };
 
 // Controller: Handle form submission to add new student
-const addFormStudents = (req, res) => {
+const addFormStudents = async(req, res) => {
   const { name, grade } = req.body;
+ const data=await fs.readFile(filepath,'utf-8')
+  const students=JSON.parse(data)
   const newStudent = {
-    id: students.length + 1,
+    id: students.length >0?students[students.length-1].id+1:1,
     name,
     grade,
   };
   students.push(newStudent);
+  await fs.writeFile(filepath,JSON.stringify(students,null,2))
   res.redirect('/students');
 };
 //fetch single student
@@ -109,7 +57,7 @@ const {NotFoundError}=require('../utils/errors')
 const fetchSingleStudent=(id)=>{
   return new Promise((res)=>{
 setTimeout(()=>{
-  const student=students.find(s=>s.id===parseInt(id+3))
+  const student=students.find(s=>s.id===parseInt(id))
   res(student)
      },1000)
   })

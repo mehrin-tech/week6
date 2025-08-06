@@ -3,16 +3,16 @@ const app=express()
 const path= require ('path')
 
 
-process.on('uncaughtException',(err)=>{
-    console.log("uncaught exception",err.message)
-    process.exit(1)
-})//app stop for the working use 6 to 9 line.
+// process.on('uncaughtException',(err)=>{
+//     console.log("uncaught exception",err.message)
+//     process.exit(1)
+// })//app stop for the working use 6 to 9 line.
 
 const studentRoutes= require('./routes/studentRoutes')
 const teacherRoutes=require('./routes/teacherRoutes')
 const { NotFoundError, BadRequestError } = require('./utils/errors')
 const { errorHandleMiddleware } = require('./middleware.js/errorHandling')
-//const { addition } = require('./controllers/moduleType.mjs')
+
 
 
 app.set('view engine','ejs')
