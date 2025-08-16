@@ -69,15 +69,15 @@
 //     console.log('end')
 // }
 // run()
-const fs=require('fs')
+// const fs=require('fs')
 
-setTimeout(()=>console.log('inside in setTimeout'))
-fs.readFile(__filename,()=>{
-    console.log('poll ingredients file arrived')
-    setImmediate(()=>console.log('check :vip order served'))
+// setTimeout(()=>console.log('inside in setTimeout'))
+// fs.readFile(__filename,()=>{
+//     console.log('poll ingredients file arrived')
+//     setImmediate(()=>console.log('check :vip order served'))
 
-})
+// })
 
-Promise.resolve().then(()=>console.log('microtask:priority task'))
-process.nextTick(()=>console.log('first priority task'))
-console.log('start')
+// Promise.resolve().then(()=>console.log('microtask:priority task'))
+// process.nextTick(()=>console.log('first priority task'))
+// console.log('start')
