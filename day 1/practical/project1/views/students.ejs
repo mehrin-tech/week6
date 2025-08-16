@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h2>All Students & Their Courses</h2>
+<ul>
+    <% students.forEach(student => { %>
+        <li>
+            <strong><%= student.name %></strong> - 
+            <% if (student.enrolled.length > 0) { %>
+                <%= student.enrolled.map(c => c.name).join(", ") %>
+            <% } else { %>
+                No courses enrolled
+            <% } %>
+        </li>
+    <% }) %>
+</ul>
+
+   
+</body>
+</html>

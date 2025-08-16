@@ -38,27 +38,36 @@ const getFormStudent=(req,res)=>{
 
 const addFormStudent= async(req,res)=>{
   const {name,grade}=req.body
+  //step:1read the existing file
   const data=await fs.readFile(filepath,'utf-8')
+  //step 2: parse JSON to obj
   const students=JSON.parse(data)
   const newStd={
     id:students.length+1,
     name,
     grade
   }
+  //step 3: add the new student
   students.push(newStd)
+  //step 4: convert back to json string
   await fs.writeFile(filepath,JSON.stringify(students,null,2))
+  
   res.redirect('/students')
 }
 //fetch single student
 const fetchSingleStudent=async(id)=>{
-    
-    return new Promise((res)=>{
-        setTimeout(()=>{
-            const student=students.find(s=>s.id===parseInt(id))
-            res(student)
-        },1000)
+    //data take in memory
+//     return new Promise((res)=>{
+//         setTimeout(()=>{
+//             const student=students.find(s=>s.id===parseInt(id))
+//             res(student)
+//         },1000)
 
-})
+// })
+const data=await fs.readFile(filepath,'utf-8')
+const students=JSON.parse(data)
+const student=students.find(s=>s.id===parseInt(id))
+return student
 }
 const getSingleStudent=async(req,res)=>{
     try{
@@ -66,10 +75,9 @@ const getSingleStudent=async(req,res)=>{
 // const student=students.find(s=>s.id===id)
             if(!student){
                 //create err obj
-                const err=new Error('student not found')
-                //err.statusCode(404)
-                //return 
-             //return res.status(404).send("student not found")
+               const err=new Error('student not found')
+               //return res.status(404).send('student not found')
+              
              } res.render('studentDetails',{title:'studentDetails',student})
     }catch(err){
   return res.status(500).send('internal server error')

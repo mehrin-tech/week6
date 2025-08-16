@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Available courses</h2>
+  <ul>
+    <% courses.forEach(course => { %>
+        <li>
+            <%= course.name %> (<%= course.code %>)
+            <form method="POST" action="/enroll/1/<%= course.id %>" style="display:inline;">
+                <button type="submit">Enroll</button>
+            </form>
+        </li>
+    <% }) %>
+</ul>
+</body>
+</html>
