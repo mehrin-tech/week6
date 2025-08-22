@@ -1,4 +1,0 @@
-hello Mehrin
-
-name:mehrin,age:22
-name:mehrin,age:22

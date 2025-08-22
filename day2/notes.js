@@ -61,7 +61,7 @@
 //     }
 // }
 //  writeData()
-
+//append file
 // const fs=require('fs').promises
 
 // async function readData(){
@@ -78,12 +78,74 @@
 
 // //working with directories:-
 // 1)fs.readdir-read content of a folder.
+//==without using async await and promise
+// const fs = require("fs");
+
+// fs.readdir("./", (err, files) => {
+//   if (err) {
+//     return console.error("Error reading directory:", err);
+//   }
+//   console.log("Files in current directory", files);
+// });
+// //===using promise
+// const fs = require("fs").promises;
+
+// fs.readdir("./")
+//   .then(files => console.log("Files:", files))
+//   .catch(err => console.error("Error:", err));
+
+
 // 2)fs.mkdir-create folder(with{recursion:true})
+//with callbacks
+// const fs = require("fs");
+
+// fs.mkdir("newFolder", (err) => {
+//   if (err) {
+//     return console.error("Error creating directory:", err);
+//   }
+//   console.log("Directory created successfully
+// });
+
 // 3)fs.rmdir-delete folder(or rm() with {recursion:true})
+// const fs=require('fs')
+// fs.rmdir('newFolder',(err)=>{
+//         if(err){
+//             return console.error(err)
+//         }
+//         console.log("directory removed successfully")
+// })
 
 
 // fs.rename(oldPath,newPath)-it renames or moves a file or directory.
+// const fs = require("fs");
+
+// fs.rename("plain.txt", "newName.txt", (err) => {
+//   if (err) {
+//     return console.error("Error renaming file:", err);
+//   }
+//   console.log("File renamed successfully!");
+// });
+//===with promise
+// const fs = require("fs").promises;
+
+// fs.rename("oldName.txt", "newName.txt")
+//   .then(() => console.log("File renamed successfully!"))
+//   .catch(err => console.error("Error:", err));
 // fs.unlink(path)-delete a file(not a directory)
+// const fs = require("fs");
+
+// fs.unlink("newName.txt", (err) => {
+//   if (err) {
+//     return console.error("Error deleting file:", err);
+//   }
+//   console.log("File deleted successfully!");
+// });
+//===with promise
+// const fs = require("fs").promises;
+
+// fs.unlink("plain.txt")
+//   .then(() => console.log("File deleted successfully!"))
+//   .catch(err => console.error("Error:", err));
 // ex:rename a file and then delete it
 
 //STREAMS
@@ -197,3 +259,7 @@
 // }
 // writeData('plain.txt','hello').then().catch()this is the way of using promise
 //we don't write promise ,nodejs is already promise available .
+
+
+
+//===basic encoding===
